@@ -11,6 +11,6 @@ spring:
   application:
     name: product-service
 env:  dev
-branch: master
+branch: test
     
     
