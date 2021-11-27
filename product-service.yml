@@ -10,3 +10,7 @@ eureka:
 spring:
   application:
     name: product-service
+env:  prod
+branch: master
+    
+    
