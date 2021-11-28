@@ -1,0 +1,46 @@
+server:
+  port: 8781
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+
+spring:
+  redis:
+    database: 0
+    host: localhost
+    port: 6379
+    timeout: 2000
+#修改调用的超时时间为2秒
+feign:
+    hystrix:
+      enabled: true
+    client:
+      config:
+        default:
+          connectTimeout: 2000
+          readTimeout: 2000
+
+
+
+#hystrix 超时时间关闭,那么ribbon超时起作用了
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 2000
+        timeout:
+          enabled: false
+
+#暴露全部的监控信
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
